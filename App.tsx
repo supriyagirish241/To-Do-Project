@@ -786,7 +786,7 @@ useEffect(() => {
       element={
         <div className="flex h-screen w-full overflow-hidden">
           {/* Sidebar */}
-       {sidebarOpen && (
+      {sidebarOpen && (
   <div
     className="fixed inset-0 bg-black/40 z-40 lg:hidden"
     onClick={() => setSidebarOpen(false)}
@@ -799,7 +799,7 @@ useEffect(() => {
   ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
   lg:translate-x-0 lg:static`}
 >
-  <Sidebar onNavigate={handleMobileNav} />
+  <Sidebar />
 </div>
 
           {/* Main Content */}
