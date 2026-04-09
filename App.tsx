@@ -167,10 +167,11 @@ console.log("TAGS:", tags);
   useEffect(() => {
   getCurrentUser().then((u) => setUser(u));
 }, []);
-useEffect(() => {
-  loadTags();
-  loadSettings();
-}, []);
+  useEffect(() => {
+  if (user) {
+    loadTags();   // ✅ only after login
+  }
+}, [user]);
 useEffect(() => {
   console.log("TAGS:", tags);
 }, [tags]);

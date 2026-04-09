@@ -344,7 +344,19 @@ const user = await getCurrentUser();
         return { tasks: [...updatedOrderedTasks, ...otherTasks] };
       }),
 loadTags: async () => {
-  const snapshot = await getDocs(collection(db, "tags"));
+  const user = auth.currentUser;
+
+  if (!user) {
+    console.log("No user logged in");
+    return;
+  }
+
+  const q = query(
+    collection(db, "tags"),
+    where("user_id", "==", user.uid)
+  );
+
+  const snapshot = await getDocs(q);
 
   const tagsFromDB = snapshot.docs.map(doc => {
     const data = doc.data();
@@ -354,11 +366,8 @@ loadTags: async () => {
       color: data.color
     };
   });
-set((state) => ({
-  ...state,
-  tags: tagsFromDB
-}));
-  
+
+  set({ tags: tagsFromDB });
 },
 loadSettings: async () => {
   const user = auth.currentUser;
