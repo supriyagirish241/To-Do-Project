@@ -416,7 +416,7 @@ useEffect(() => {
           <h1 className="text-3xl font-black tracking-tight mb-2">Settings</h1>
           <p className="text-neutral-500">Configure your local productivity engine.</p>
          <button
-  className="lg:hidden p-2"
+  className="lg:hidden p-2 mr-2"
   onClick={() => setSidebarOpen(true)}
 >
   <Menu size={24} />
@@ -786,7 +786,7 @@ useEffect(() => {
       element={
         <div className="flex h-screen w-full overflow-hidden">
           {/* Sidebar */}
-        {sidebarOpen && (
+       {sidebarOpen && (
   <div
     className="fixed inset-0 bg-black/40 z-40 lg:hidden"
     onClick={() => setSidebarOpen(false)}
@@ -795,7 +795,7 @@ useEffect(() => {
 
 {/* Sidebar */}
 <div
-  className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-neutral-900 z-50 transform transition-transform duration-300
+  className={`fixed top-0 left-0 h-full w-full lg:w-64 bg-white dark:bg-neutral-900 z-50 transform transition-transform duration-300
   ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
   lg:translate-x-0 lg:static`}
 >
