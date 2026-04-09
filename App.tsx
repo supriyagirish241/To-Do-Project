@@ -415,6 +415,12 @@ useEffect(() => {
         <header className="mb-10">
           <h1 className="text-3xl font-black tracking-tight mb-2">Settings</h1>
           <p className="text-neutral-500">Configure your local productivity engine.</p>
+          <button
+  className="lg:hidden p-2"
+  onClick={() => setSidebarOpen(!sidebarOpen)}
+>
+  <Menu size={24} />
+</button>
         </header>
 
         <div className="space-y-8">
@@ -573,11 +579,17 @@ useEffect(() => {
     );
 
     return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl mx-auto px-6 py-12">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
         <header className="mb-12 flex flex-col gap-6">
+           <button
+    className="lg:hidden p-2 mr-2"
+    onClick={() => setSidebarOpen(true)}
+  >
+    <Menu size={24} />
+  </button>
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-black text-neutral-900 dark:text-white tracking-tight capitalize">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-neutral-900 dark:text-white tracking-tight capitalize">
                 {filterTagId ? activeTagName : (activeView === 'inbox' ? 'My Tasks' : activeView)}
               </h1>
               <p className="text-neutral-500 dark:text-neutral-400 mt-1">
@@ -772,10 +784,21 @@ useEffect(() => {
     <Route
       path="/"
       element={
-        <div className={`flex h-screen w-full bg-neutral-50 dark:bg-neutral-900`}>
-
+        <div className="flex flex-col lg:flex-row h-screen w-full">
           {/* Sidebar */}
-          <div className="w-64">
+         {sidebarOpen && (
+  <div
+    className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+    onClick={() => setSidebarOpen(false)}
+  />
+)}
+
+{/* Sidebar */}
+<div
+  className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-neutral-900 z-50 transform transition-transform duration-300
+  ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+  lg:translate-x-0 lg:static`}
+>
             <Sidebar
               onNavigate={handleMobileNav}
               onAddTagRequest={() => {}}

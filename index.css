@@ -12,9 +12,9 @@
     --accent-color-700: #4338ca;
   }
   
-  body {
-    @apply font-sans;
-  }
+ body {
+  @apply font-sans text-neutral-900 dark:text-neutral-100 bg-white dark:bg-neutral-900;
+}
 }
 
 /* Custom scrollbar */
