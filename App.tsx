@@ -415,9 +415,9 @@ useEffect(() => {
         <header className="mb-10">
           <h1 className="text-3xl font-black tracking-tight mb-2">Settings</h1>
           <p className="text-neutral-500">Configure your local productivity engine.</p>
-          <button
+         <button
   className="lg:hidden p-2"
-  onClick={() => setSidebarOpen(!sidebarOpen)}
+  onClick={() => setSidebarOpen(true)}
 >
   <Menu size={24} />
 </button>
@@ -784,9 +784,9 @@ useEffect(() => {
     <Route
       path="/"
       element={
-        <div className="flex flex-col lg:flex-row h-screen w-full">
+        <div className="flex h-screen w-full overflow-hidden">
           {/* Sidebar */}
-         {sidebarOpen && (
+        {sidebarOpen && (
   <div
     className="fixed inset-0 bg-black/40 z-40 lg:hidden"
     onClick={() => setSidebarOpen(false)}
@@ -799,14 +799,11 @@ useEffect(() => {
   ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
   lg:translate-x-0 lg:static`}
 >
-            <Sidebar
-              onNavigate={handleMobileNav}
-              onAddTagRequest={() => {}}
-            />
-          </div>
+  <Sidebar onNavigate={handleMobileNav} />
+</div>
 
           {/* Main Content */}
-          <main className="flex-1 overflow-y-auto">
+          <main className="flex-1 overflow-y-auto w-full">
             {renderContent()}
           </main>
           <AlertDialog
