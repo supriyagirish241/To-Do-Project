@@ -795,15 +795,15 @@ useEffect(() => {
 
 {/* Sidebar */}
 <div
-  className={`fixed top-0 left-0 h-full w-full lg:w-64 bg-white dark:bg-neutral-900 z-50 transform transition-transform duration-300
+  className={`fixed top-0 left-0 h-full w-full bg-white dark:bg-neutral-900 z-50 transform transition-transform duration-300
   ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-  lg:translate-x-0 lg:static`}
+  lg:w-64 lg:translate-x-0 lg:static`}
 >
   <Sidebar />
 </div>
 
           {/* Main Content */}
-          <main className="flex-1 overflow-y-auto w-full">
+         <main className={`flex-1 overflow-y-auto w-full ${sidebarOpen ? 'hidden lg:block' : 'block'}`}>
             {renderContent()}
           </main>
           <AlertDialog
