@@ -20,7 +20,7 @@ const addHistory = async (taskId: string, action: string) => {
   await addDoc(collection(db, "task history"), {
     history_id: crypto.randomUUID(),
     task_id: taskId,
-    user_id: user.uid, // ✅ always correct
+    user_id: user.uid, 
     action,
     timestamp: new Date()
   });
@@ -35,8 +35,7 @@ const getCurrentUser = (): Promise<any> => {
 };
 
 const addTagToFirebase = async (tagId: string, name: string, color: string) => {
-   const user = await getCurrentUser(); // ✅ FIX
-
+   const user = await getCurrentUser(); 
   if (!user) {
     console.log("No user found");
     return;
@@ -45,8 +44,8 @@ const addTagToFirebase = async (tagId: string, name: string, color: string) => {
     tag_id: tagId,
     tag_name: name,
     color: color,
-    user_id: user?.uid || "unknown", // ✅ ADD THIS
-    created_at: new Date() // ✅ ADD THIS
+    user_id: user?.uid || "unknown", 
+    created_at: new Date()
   });
 };
 const loadTagsFromFirebase = async () => {
@@ -77,17 +76,14 @@ const updateDailyProgress = async () => {
     const snapshot = await getDocs(q);
 
     if (snapshot.empty) {
-      await addDoc(collection(db, "daily_targets"), {
+await addDoc(collection(db, "daily_targets"), {
   target_id: crypto.randomUUID(),
   user_id: user.uid,
-
-  target_date: today, // ✅ renamed
-  created_at: new Date(), // ✅ new
-
-  target_task_count: 5, // ✅ goal
-  completed_task_count: 1, // ✅ count
-
-  target_status: "not_achieved" // ✅ default
+  target_date: today,
+  created_at: new Date(), 
+  target_task_count: 5, 
+  completed_task_count: 1, 
+  target_status: "not_achieved" 
 });
       return;
     }
@@ -100,7 +96,7 @@ const goal = data.target_task_count || 5;
 
 await updateDoc(docItem.ref, {
   completed_task_count: newCount,
-  target_status: newCount >= goal ? "achieved" : "not_achieved" // ✅ logic
+  target_status: newCount >= goal ? "achieved" : "not_achieved" 
 });
     });
 
@@ -246,9 +242,7 @@ export const useStore = create<ToDoSStore>()(
   }
 
   // ✅ SAVE TO FIREBASE
-  await setDoc(
-  doc(db, "settings", user.uid),
-  {
+await setDoc(doc(db, "settings", user.uid),{
     setting_id: user.uid,
     user_id: user.uid,
     theme: theme,
@@ -285,7 +279,7 @@ export const useStore = create<ToDoSStore>()(
 
       setView: (activeView) => set({ activeView, filterTagId: null }),
 
-      addTask: async (taskData) => {
+addTask: async (taskData) => {
 const user = await getCurrentUser();
 
   const maxPos = get().tasks.reduce((max, t) => Math.max(max, t.position), -1);
@@ -307,15 +301,13 @@ const user = await getCurrentUser();
 
   // 🔥 SAVE TO FIREBASE
   await addDoc(collection(db, "tasks"), {
-    task_id: newTask.id,
+  task_id: newTask.id,
   user_id: user?.uid || "unknown",
   title: newTask.title,
   description: newTask.description,
   status: "pending",
-
-  // ✅ IMPORTANT FIELDS
-  created_at: new Date(), // ✅ when task created
-  completed_at: null,     // ✅ initially null
+  created_at: new Date(), 
+  completed_at: null,     
   due_date: newTask.dueDate
   ? new Date(new Date(newTask.dueDate).setHours(23, 59, 59, 999))
   : null,

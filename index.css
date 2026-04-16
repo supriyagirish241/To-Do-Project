@@ -11,13 +11,96 @@
     --accent-color-600: #4f46e5;
     --accent-color-700: #4338ca;
   }
-  
- body {
-  @apply font-sans text-neutral-900 dark:text-neutral-100 bg-white dark:bg-neutral-900;
+
+body {
+  background: red !important;
 }
 }
 
-/* Custom scrollbar */
+/* 🔥 PREMIUM COMPONENT SYSTEM */
+@layer components {
+
+  /* 🌟 MAIN CARD (BEST FOR UI) */
+  .soft-card {
+    @apply bg-white/80 dark:bg-white/5 
+           backdrop-blur-xl 
+           border border-neutral-200 dark:border-white/10 
+           shadow-[0_10px_40px_rgba(0,0,0,0.08)] 
+           dark:shadow-[0_10px_40px_rgba(0,0,0,0.4)] 
+           rounded-3xl;
+  }
+
+  /* 🌟 GLASS CARD (SECONDARY USE) */
+  .glass-card {
+    @apply backdrop-blur-xl 
+           bg-white/70 dark:bg-white/10 
+           border border-neutral-200 dark:border-white/20 
+           shadow-[0_8px_30px_rgba(0,0,0,0.08)] 
+           dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] 
+           rounded-3xl;
+  }
+
+  /* ✨ HOVER EFFECT */
+  .card-hover {
+    @apply transition-all duration-300 
+           hover:shadow-lg hover:scale-[1.01];
+  }
+
+  /* ✨ INPUT FIELD */
+  .glass-input {
+    @apply w-full p-3 rounded-xl 
+           bg-white/70 dark:bg-white/10 
+           border border-neutral-200 dark:border-white/20 
+           text-neutral-800 dark:text-white
+           placeholder-neutral-400 dark:placeholder-gray-400
+           focus:outline-none 
+           focus:ring-2 focus:ring-purple-400 
+           focus:bg-white dark:focus:bg-white/20 
+           transition duration-200;
+  }
+
+  /* 🔥 PRIMARY BUTTON */
+  .glass-button {
+    @apply w-full 
+           bg-gradient-to-r from-indigo-500 to-purple-600 
+           text-white font-semibold 
+           p-3 rounded-xl 
+           shadow-[0_6px_20px_rgba(99,102,241,0.4)] 
+           hover:opacity-90 active:scale-[0.98] 
+           transition duration-200;
+  }
+
+  /* 🔘 SECONDARY BUTTON */
+  .glass-button-secondary {
+    @apply w-full 
+           bg-white/70 dark:bg-white/10 
+           border border-neutral-200 dark:border-white/20 
+           text-neutral-700 dark:text-white
+           hover:bg-white dark:hover:bg-white/20 
+           transition p-3 rounded-xl;
+  }
+
+  /* 💡 SMALL TAG BUTTON (DATE / PRIORITY) */
+  .pill {
+    @apply px-4 py-1.5 rounded-full text-xs font-medium 
+           bg-white/70 dark:bg-white/5 
+           border border-neutral-200 dark:border-white/10 
+           text-neutral-600 dark:text-neutral-300 
+           hover:bg-neutral-100 dark:hover:bg-white/10 
+           transition;
+  }
+
+  .pill-active {
+    @apply bg-accent/10 text-accent border-accent/20;
+  }
+
+  /* ✨ GLOW TEXT */
+  .text-glow {
+    text-shadow: 0 0 8px rgba(99,102,241,0.5);
+  }
+}
+
+/* 🔥 SCROLLBAR */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -25,17 +108,17 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #e5e7eb;
+  background: #9ca3af;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #d1d5db;
+  background: #6b7280;
 }
 .dark ::-webkit-scrollbar-thumb {
   background: #374151;
 }
 
-/* Animation helpers */
+/* 🔥 SMOOTH PAGE ANIMATION */
 .page-transition-enter {
   opacity: 0;
   transform: translateY(10px);
@@ -43,5 +126,5 @@
 .page-transition-enter-active {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 200ms, transform 200ms;
+  transition: opacity 250ms ease, transform 250ms ease;
 }

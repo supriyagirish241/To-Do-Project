@@ -174,17 +174,22 @@ export const TaskInput: React.FC<TaskInputProps> = ({ defaultDate }) => {
     <div className="max-w-3xl mx-auto px-6 relative" ref={popoverRef}>
       {/* Popover Menus */}
       {activePopover && (
-        <div className="absolute bottom-full mb-3 left-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-xl border border-neutral-100 dark:border-neutral-700 p-2 min-w-[200px] z-50">
-
+       <div className="absolute bottom-full mb-3 left-6 
+backdrop-blur-xl bg-white/90 dark:bg-neutral-800/90
+rounded-2xl shadow-2xl p-2 min-w-[220px] z-50">
           {/* Date Popover */}
           {activePopover === 'date' && (
             <div className="flex flex-col gap-1">
               <button onClick={() => { setDueDate(format(new Date(), 'yyyy-MM-dd')); setActivePopover(null); }} className="flex items-center justify-between px-3 py-2 text-sm rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-700/50 text-neutral-700 dark:text-neutral-200 font-medium">
-                <div className="flex items-center gap-2"><Calendar size={14} className="text-neutral-400" /> Today</div>
+                <div className="flex items-center justify-between px-3 py-2 text-sm rounded-xl 
+hover:bg-neutral-100 dark:hover:bg-neutral-700 
+text-neutral-700 dark:text-neutral-200 font-medium"><Calendar size={14} className="text-neutral-400" /> Today</div>
                 <span className="text-xs text-neutral-400 font-mono">{format(new Date(), 'EEE')}</span>
               </button>
               <button onClick={() => { setDueDate(format(addDays(new Date(), 1), 'yyyy-MM-dd')); setActivePopover(null); }} className="flex items-center justify-between px-3 py-2 text-sm rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-700/50 text-neutral-700 dark:text-neutral-200 font-medium">
-                <div className="flex items-center gap-2"><Calendar size={14} className="text-neutral-400" /> Tomorrow</div>
+                <div className="flex items-center justify-between px-3 py-2 text-sm rounded-xl 
+hover:bg-neutral-100 dark:hover:bg-neutral-700 
+text-neutral-700 dark:text-neutral-200 font-medium"><Calendar size={14} className="text-neutral-400" /> Tomorrow</div>
                 <span className="text-xs text-neutral-400 font-mono">{format(addDays(new Date(), 1), 'EEE')}</span>
               </button>
               <button onClick={() => {
@@ -239,8 +244,9 @@ export const TaskInput: React.FC<TaskInputProps> = ({ defaultDate }) => {
         </div>
       )}
 
-      <div className="bg-white dark:bg-neutral-800 rounded-3xl border border-neutral-200 dark:border-neutral-700 shadow-2xl shadow-accent/10 dark:shadow-none p-3.5 flex flex-col gap-3">
-        <div className="flex items-center gap-2">
+      <div className="backdrop-blur-xlbg-white/80 border border-white/10 
+rounded-2xl shadow-xl p-4 sm:p-5 flex flex-col gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <input
             autoFocus
             type="text"
@@ -248,22 +254,28 @@ export const TaskInput: React.FC<TaskInputProps> = ({ defaultDate }) => {
             onChange={(e) => setTitle(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type task... (e.g. 'Pay bills @tomorrow !high #personal *daily')"
-            className="flex-1 px-4 py-1.5 text-sm outline-none placeholder:text-neutral-400 dark:placeholder:text-neutral-500 bg-transparent text-neutral-900 dark:text-white"
+            className="flex-1 px-3 sm:px-4 py-2 text-sm outline-none 
+bg-transparent text-neutral-900 dark:text-white placeholder:text-gray-500"
           />
           <button
-            onClick={handleAdd}
-            disabled={!title.trim()}
-            className="p-3 bg-accent text-white rounded-2xl hover:bg-accent-700 disabled:opacity-30 transition-all shadow-lg shadow-accent/20 dark:shadow-none"
-          >
-            <Plus size={20} strokeWidth={3} />
-          </button>
+  onClick={handleAdd}
+  disabled={!title.trim()}
+  className="p-3 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 
+  hover:opacity-90 active:scale-95 transition shadow-lg disabled:opacity-30"
+>
+  <Plus size={20} strokeWidth={3} />
+</button>
         </div>
 
-        <div className="flex items-center flex-wrap gap-2 border-t border-neutral-100 dark:border-neutral-700 pt-3 px-1">
+        <div className="flex items-center flex-wrap gap-2 sm:gap-3 border-t border-white/10 pt-3 px-1">
 
           <button
             onClick={() => setActivePopover(activePopover === 'date' ? null : 'date')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all text-xs font-bold ${activePopover === 'date' ? 'border-accent text-accent bg-accent-50 dark:bg-accent/10' : 'border-neutral-100 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 hover:border-neutral-300'}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all
+${activePopover === 'date'
+  ? 'bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-white border-neutral-300 dark:border-neutral-600'
+  : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border-neutral-200 dark:border-neutral-700 hover:bg-neutral-200 dark:hover:bg-neutral-700'
+}`}
           >
             <Calendar size={14} />
             {getDateLabel()}
@@ -271,7 +283,11 @@ export const TaskInput: React.FC<TaskInputProps> = ({ defaultDate }) => {
 
           <button
             onClick={() => setActivePopover(activePopover === 'recurrence' ? null : 'recurrence')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all text-xs font-bold ${activePopover === 'recurrence' ? 'border-accent text-accent bg-accent-50 dark:bg-accent/10' : 'border-neutral-100 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 hover:border-neutral-300'} ${recurrence ? 'text-accent border-accent/50' : ''}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold transition-all
+${activePopover === 'recurrence'
+  ? 'bg-accent/10 text-accent border-accent/20'
+  : 'bg-neutral-100 dark:bg-white/5 text-neutral-600 dark:text-neutral-300 border-neutral-200 dark:border-white/10 hover:bg-neutral-200 dark:hover:bg-white/10'
+}`}
           >
             <Repeat size={14} />
             {recurrence ? <span className="capitalize">{recurrence}</span> : 'One-off'}
@@ -279,7 +295,11 @@ export const TaskInput: React.FC<TaskInputProps> = ({ defaultDate }) => {
 
           <button
             onClick={() => setActivePopover(activePopover === 'priority' ? null : 'priority')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border transition-all text-xs font-bold ${activePopover === 'priority' ? 'border-accent bg-accent-50 dark:bg-accent/10' : 'border-neutral-100 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 hover:border-neutral-300'}`}
+           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold transition-all
+${activePopover === 'priority'
+  ? 'bg-accent/10 text-accent border-accent/20'
+  : 'bg-neutral-100 dark:bg-white/5 text-neutral-600 dark:text-neutral-300 border-neutral-200 dark:border-white/10 hover:bg-neutral-200 dark:hover:bg-white/10'
+}`}
           >
             <Flag size={14} className={priority === Priority.HIGH ? 'text-rose-500' : priority === Priority.MEDIUM ? 'text-amber-500' : 'text-emerald-500'} />
             <span className={priority === Priority.HIGH ? 'text-rose-500' : priority === Priority.MEDIUM ? 'text-amber-500' : 'text-emerald-500'}>

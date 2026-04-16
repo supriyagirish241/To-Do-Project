@@ -417,7 +417,7 @@ useEffect(() => {
           <h1 className="text-3xl font-black tracking-tight mb-2">Settings</h1>
           <p className="text-neutral-500">Configure your local productivity engine.</p>
          <button
-  className="lg:hidden p-2 mr-2"
+ className="lg:hidden p-2 mr-2 rounded-xl hover:bg-white/10"
   onClick={() => setSidebarOpen(true)}
 >
   <Menu size={24} />
@@ -580,7 +580,7 @@ useEffect(() => {
     );
 
     return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-12">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl mx-auto px-3 sm:px-6 py-6 sm:py-12">
         <header className="mb-12 flex flex-col gap-6">
            <button
     className="lg:hidden p-2 mr-2"
@@ -656,7 +656,14 @@ useEffect(() => {
               placeholder="Search tasks, tags, or focus areas... (Press / to focus)"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white dark:bg-neutral-800/80 border border-neutral-100 dark:border-neutral-700 rounded-3xl py-5 pl-14 pr-4 outline-none focus:ring-4 focus:ring-accent/10 focus:border-accent transition-all text-sm font-bold shadow-sm"
+              className="w-full 
+bg-white/70 dark:bg-white/5 
+backdrop-blur-xl 
+border border-neutral-200 dark:border-white/10 
+rounded-3xl py-5 pl-12 sm:pl-14 pr-4 
+outline-none focus:ring-4 focus:ring-accent/10 
+focus:border-accent transition-all text-sm font-semibold 
+shadow-sm hover:shadow-md"
             />
             {searchQuery && (
               <button onClick={() => setSearchQuery('')} className="absolute right-5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-rose-500 transition-colors">
@@ -785,26 +792,30 @@ useEffect(() => {
     <Route
       path="/"
       element={
-        <div className="flex h-screen w-full overflow-hidden">
+        <div className="flex h-screen w-full overflow-hidden bg-white dark:bg-[#0b0f1a]">
           {/* Sidebar */}
       {sidebarOpen && (
   <div
-    className="fixed inset-0 bg-black/40 z-40 lg:hidden"
-    onClick={() => setSidebarOpen(false)}
-  />
+  className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+  onClick={() => setSidebarOpen(false)}
+/>
 )}
 
 {/* Sidebar */}
 <div
-  className={`fixed top-0 left-0 h-full w-79 bg-white dark:bg-neutral-900 z-50 transform transition-transform duration-300
+  className={`fixed top-0 left-0 h-full 
+  w-[280px] sm:w-[300px] lg:w-64
+backdrop-blur-xl 
+bg-white dark:bg-white/10 
+border-r border-neutral-200 dark:border-white/10 z-50 transform transition-transform duration-300
   ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-  lg:w-64 lg:translate-x-0 lg:static`}
+  lg:translate-x-0 lg:static`}
 >
   <Sidebar />
 </div>
 
           {/* Main Content */}
-         <main className="flex-1 overflow-y-auto w-full">
+         <main className="flex-1 overflow-y-auto w-full relative z-10 px-2 sm:px-4">
             {renderContent()}
           </main>
           <AlertDialog
