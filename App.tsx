@@ -21,7 +21,7 @@ import {
   ArrowRight, Loader2, Plus, Minus, Filter, Edit2, Palette, ChevronRight,
   Calendar, Flag, Check, LayoutList, Repeat, CircleHelp
 } from 'lucide-react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/features/auth/login";
 import Signup from "./components/features/auth/signup";
 import ForgotPassword from "./components/features/auth/ForgotPassword";
@@ -784,7 +784,10 @@ shadow-sm hover:shadow-md"
      <Routes>
 
     {/* 🔐 Auth Pages */}
-    <Route path="/login" element={<Login />} />
+    <Route
+  path="/login"
+  element={user ? <Navigate to="/" replace /> : <Login />}
+/>
     <Route path="/signup" element={<Signup />} />
     <Route path="/forgot" element={<ForgotPassword />} />
 
@@ -792,7 +795,8 @@ shadow-sm hover:shadow-md"
     <Route
       path="/"
       element={
-        <div className="flex h-screen w-full overflow-hidden bg-white dark:bg-[#0b0f1a]">
+  user ? (
+    <div className="flex h-screen w-full overflow-hidden bg-white dark:bg-[#0b0f1a]">
           {/* Sidebar */}
       {sidebarOpen && (
   <div
@@ -841,7 +845,10 @@ border-r border-neutral-200 dark:border-white/10 z-50 transform transition-trans
 />
 
         </div>
-      }
+       ) : (
+    <Navigate to="/login" replace />
+  )
+}
     />
 
   </Routes>

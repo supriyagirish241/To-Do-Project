@@ -15,7 +15,7 @@ function Login() {
       setLoading(true);
       const user = await login(email, password);
       console.log("Logged in:", user);
-      navigate("/");
+      window.location.href = "/";
       alert("Login successful ✅");
     } catch (error: any) {
       alert(error.message);
